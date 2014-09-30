@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # **NewsQuiz.js** 
 
 ## Spreadsheet to quiz!
@@ -236,3 +237,9 @@ Note that the `phantomjs` executable needs to be in the system `PATH` for grunt 
 [Jaeah Lee](http://twitter.com/jaeahjlee) designed it and implemented the fluid layout.
 
 [Tasneem Raja](http://twitter.com/tasneemraja), who headbangs to Fleetwood Mac _Rhiannon_ while writing documentation, edited it.
+=======
+project2
+========
+
+Project 2 for 586
+>>>>>>> 975892efc334736342a62509ed954468ffa7d717
