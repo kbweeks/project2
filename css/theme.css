@@ -1,0 +1,144 @@
+#slides_container p {
+    font-family: arial;
+    font-size:11pt;
+    line-height: 1.25;  
+}
+#slides_container h3, ul, li {
+    font-family: arial;
+    font-size:9pt;
+    line-height: 1.25;
+}
+#slides_container h1{
+    font-size:22pt;
+    font-family: 'Josefin Sans', sans-serif;
+    line-height: 1px;
+}
+#slides_container h1:after{
+    height: 1px;
+    margin: 10px 0 10px 0;
+}
+#slides_container p {
+    margin:0px;
+}
+#slides_container h2:after{
+    height: 0px;
+}
+#slides_container {
+    width:400px;
+}
+.cartodb-timeslider, .ui-slider, .ui-slider-range {
+    background-color: #0cc1bc;
+}
+.ui-slider-range{
+    background-color:white;
+}
+.title2{
+   right: 400px;
+   font-family: 'Proxima N W01 Bold', Sans-serif;
+   position:relative;
+}
+.title3{
+   left: 300px;
+   font-family: 'Proxima N W01 Bold', Sans-serif;
+   position:relative;
+}
+div#credits a{
+    color:black;
+}
+div#myModal.reveal-modal{
+    height:650px;
+    padding-top:5px;
+    padding-left:15px;
+    width:1000px;
+    left:350px;
+    top:30px;
+}
+h1.title{
+    visibility: hidden;
+}
+div.question.col-12.show {
+    top:-40px;
+    padding-bottom:0px;
+}
+li.possible_answer.col-12.answer_0{
+    padding:1px;
+    background: #0cc1bc;
+    max-width:100px;
+    text-align:center;
+}
+li.possible_answer.col-12.answer_1{
+    padding:1px;
+    background: #0cc1bc;
+    text-align:center;
+    max-width:100px;
+}
+p.text {
+    font-size:8pt;
+}
+li.question_container.row-fluid.question_0 {
+    margin:5em;
+}
+li.question_container.row-fluid.question_1 {
+    margin:5em;
+}
+li.question_container.row-fluid.question_2 {
+    margin:5em;
+}
+li.question_container.row-fluid.question_3 {
+    margin:5em;
+}
+li.question_container.row-fluid.question_4 {
+    margin:5em;
+}
+ul.col-12.possible_answers.possible_answers_0{
+    margin-top:-50px;
+}
+ul.col-12.possible_answers.possible_answers_1{
+    margin-top:-50px;
+}
+ul.col-12.possible_answers.possible_answers_2{
+    margin-top:-50px;
+}
+ul.col-12.possible_answers.possible_answers_3{
+    margin-top:-50px;
+}
+ul.col-12.possible_answers.possible_answers_4{
+    margin-top:-50px;
+}
+div.question.col-12.show.revealed_answer {
+    margin-top:10px;
+}
+li.col-12.answer_0.selected.wrong_answer, li.col-12.answer_1.selected.wrong_answer{
+    padding:1px;
+    max-width:100px;
+}
+li.col-12.answer_0.wrong_answer, li.col-12.answer_1.wrong_answer{
+    padding:1px;
+    text-align:center;
+    max-width:100px;
+}
+li.col-12.answer_0.correct_answer, li.col-12.answer_1.correct_answer {
+    padding:1px;
+    text-align:center;
+    max-width:100px;
+}
+li.col-12.answer_0.selected.correct_answer, li.col-12.answer_1.selected.correct_answer{
+    padding:1px;
+    text-align:center;
+    max-width:100px;
+}
+p.how_you_did {
+    visibility: hidden;
+}
+p.text {
+    margin-bottom:5px;
+}
+quiz_container {
+    text-align: center;
+}
+
+
+
+
+
+

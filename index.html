@@ -1,0 +1,558 @@
+<!doctype><html><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Odyssey.js Slides</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/x-icon" href="http://cartodb.github.io/odyssey.js/sandbox/favicon.png">
+  <link rel="icon" type="image/png" href="http://cartodb.github.io/odyssey.js/sandbox/favicon.png">
+
+  
+  <link rel="stylesheet" href="http://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/themes/css/cartodb.css">
+  <link rel="stylesheet" href="http://cartodb.github.io/odyssey.js/sandbox/css/slides.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='theme/css'>
+  <script src="http://cartodb.github.io/odyssey.js/vendor/modernizr-2.6.2.min.js"></script>
+
+        <script src="libs/jquery/jquery.js"></script>
+        <script src="js/tabletop.js"></script>
+        <script src="js/newsquiz.min.js"></script>      
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+        <link href="css/style.css" rel="stylesheet" media="screen">
+        
+</head>
+<body>
+  <div id="map" style="width: 100%; height: 100%;"></div>
+
+  <div id="slides_container" style="display:block;">
+    <div id="dots"></div>
+
+    <div id="slides"></div>
+
+    <ul id="navButtons">
+      <li><a class="prev"></a></li>
+      <li><a class="next"></a></li>
+    </ul>
+  </div>
+
+  <div id="credits">
+    <span class="title" id="title">The History of Ebola</span>
+    <span class="title2"><a href="#" data-reveal-id="myModal">Take the Quiz</a></span>
+    <span class="title3"><a href="http://kateweeks.com/credits">Credits</a></span>
+    <span class="author"><b id="author">By Kate Weeks</b> <a href="#">Odyssey.js</a><span>
+  </span></span></div>
+  
+
+  <div id="myModal" class="reveal-modal">
+     <p>
+      <div id="quiz_container"></div>
+      <script type="text/javascript">
+      var quiz = jQuery('#quiz_container').quiz('0AmNzPemc77iHdGlkZDlkRDhlSlpiSHZ6OFV6V3ZSZ1E'); 
+      </script>
+     </p>
+     <a class="close-reveal-modal">&#215;</a>
+</div>
+    
+    
+    <span class="author"><strong id="author">By Name using</strong> <a href="http://cartodb.github.io/odyssey.js/">Odyssey.js</a><span>
+  </span></span></div>
+
+  <script src="http://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/cartodb.js"></script>
+  <script src="http://cartodb.github.io/odyssey.js/dist/odyssey.js" charset="UTF-8"></script>
+  <link rel="stylesheet" href="css/reveal.css"> 
+  
+  <script src="js/jquery.reveal.js" type="text/javascript"></script>
+  
+  <script>
+    var resizePID;
+
+    function clearResize() {
+      clearTimeout(resizePID);
+      resizePID = setTimeout(function() { adjustSlides(); }, 100);
+    }
+
+    if (!window.addEventListener) {
+      window.attachEvent("resize", function load(event) {
+        clearResize();
+      });
+    } else {
+      window.addEventListener("resize", function load(event) {
+        clearResize();
+      });
+    }
+
+    function adjustSlides() {
+      var container = document.getElementById("slides_container"),
+          slide = document.querySelectorAll('.selected_slide')[0];
+
+      if (slide) {
+        if (slide.offsetHeight+169+40+80 >= window.innerHeight) {
+          container.style.bottom = "80px";
+
+          var h = container.offsetHeight;
+
+          slide.style.height = h-169+"px";
+          slide.classList.add("scrolled");
+        } else {
+          container.style.bottom = "auto";
+          container.style.minHeight = "0";
+
+          slide.style.height = "auto";
+          slide.classList.remove("scrolled");
+        }
+      }
+    }
+
+    var resizeAction = O.Action(function() {
+      function imageLoaded() {
+        counter--;
+
+        if (counter === 0) {
+          adjustSlides();
+        }
+      }
+      var images = $('img');
+      var counter = images.length;
+
+      images.each(function() {
+        if (this.complete) {
+          imageLoaded.call( this );
+        } else {
+          $(this).one('load', imageLoaded);
+        }
+      });
+    });
+
+    function click(el) {
+      var element = O.Core.getElement(el);
+      var t = O.Trigger();
+
+      // TODO: clean properly
+      function click() {
+        t.trigger();
+      }
+
+      if (element) element.onclick = click;
+
+      return t;
+    }
+
+    O.Template({
+      init: function() {
+        var seq = O.Triggers.Sequential();
+
+        var baseurl = this.baseurl = 'http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
+        var map = this.map = L.map('map').setView([0, 0.0], 4);
+        var basemap = this.basemap = L.tileLayer(baseurl, {
+          attribution: 'data OSM - map CartoDB'
+        }).addTo(map);
+
+        // enanle keys to move
+        O.Keys().on('map').left().then(seq.prev, seq)
+        O.Keys().on('map').right().then(seq.next, seq)
+
+        click(document.querySelectorAll('.next')).then(seq.next, seq)
+        click(document.querySelectorAll('.prev')).then(seq.prev, seq)
+
+        var slides = O.Actions.Slides('slides');
+        var story = O.Story()
+
+        this.story = story;
+        this.seq = seq;
+        this.slides = slides;
+        this.progress = O.UI.DotProgress('dots').count(0);
+      },
+
+      update: function(actions) {
+        var self = this;
+
+        if (!actions.length) return;
+
+        this.story.clear();
+
+        if (this.baseurl && (this.baseurl !== actions.global.baseurl)) {
+          this.baseurl = actions.global.baseurl || 'http://0.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
+
+          this.basemap.setUrl(this.baseurl);
+        }
+
+        if (this.cartoDBLayer && ("http://"+self.cartoDBLayer.options.user_name+".cartodb.com/api/v2/viz/"+self.cartoDBLayer.options.layer_definition.stat_tag+"/viz.json" !== actions.global.vizjson)) {
+          this.map.removeLayer(this.cartoDBLayer);
+
+          this.cartoDBLayer = null;
+          this.created = false;
+        }
+
+        if (actions.global.vizjson && !this.cartoDBLayer) {
+          if (!this.created) { // sendCode debounce < vis loader
+            cdb.vis.Loader.get(actions.global.vizjson, function(vizjson) {
+              self.map.fitBounds(vizjson.bounds);
+
+              cartodb.createLayer(self.map, vizjson)
+                .done(function(layer) {
+                  self.cartoDBLayer = layer;
+
+                  var sublayer = layer.getSubLayer(0),
+                      layer_name = layer.layers[0].options.layer_name,
+                      filter = actions.global.cartodb_filter ? " WHERE "+actions.global.cartodb_filter : "";
+
+                  sublayer.setSQL("SELECT * FROM "+layer_name+filter)
+
+                  self.map.addLayer(layer);
+
+                  self._resetActions(actions);
+                }).on('error', function(err) {
+                  console.log("some error occurred: " + err);
+                });
+            });
+
+            this.created = true;
+          }
+
+          return;
+        }
+
+        this._resetActions(actions);
+      },
+
+      _resetActions: function(actions) {
+        // update footer title and author
+        var title_ = actions.global.title === undefined ? '' : actions.global.title,
+            author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using';
+
+        document.getElementById('title').innerHTML = title_;
+        document.getElementById('author').innerHTML = author_;
+        document.title = title_ + " | " + author_ +' Odyssey.js';
+
+        var sl = actions;
+
+        document.getElementById('slides').innerHTML = ''
+        this.progress.count(sl.length);
+
+        // create new story
+        for(var i = 0; i < sl.length; ++i) {
+          var slide = sl[i];
+          var tmpl = "<div class='slide' style='diplay:none'>";
+
+          tmpl += slide.html();
+          tmpl += "</div>";
+          document.getElementById('slides').innerHTML += tmpl;
+
+          this.progress.step(i).then(this.seq.step(i), this.seq)
+
+          var actions = O.Parallel(
+            this.slides.activate(i),
+            slide(this),
+            this.progress.activate(i),
+            resizeAction
+          );
+
+          actions.on("finish.app", function() {
+            adjustSlides();
+          });
+
+          this.story.addState(
+            this.seq.step(i),
+            actions
+          )
+        }
+
+        this.story.go(this.seq.current());
+      },
+
+      changeSlide: function(n) {
+        this.seq.current(n);
+      }
+    });
+  </script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-20934186-21', 'cartodb.github.io');
+    ga('send', 'pageview');
+  </script>
+
+  <script type="text/javascript" src="http://fast.fonts.net/jsapi/3af16084-ba56-49ca-b37d-0b49b59e1927.js"></script>
+
+<script id="md_template" type="text/template">```
+-title: "The History of Ebola"
+-author: "Kate Weeks"
+```
+
+# The History of Ebola
+```
+- step: 1
+- center: [-4.0396, 5.5371]
+- zoom: 2
+```
+
+![Alt text](graph.png)
+
+As seen from the graph, our world is currently facing the worst Ebola outbreak in history.
+Follow us on a tour of the world and time to learn about Ebola in history. 
+
+# 1976-1977
+```
+- step: 50
+- center: [2.5480, 16.7871]
+- zoom: 4
+L.marker([16.7204, 30.1465]).actions.addRemove(S.map)
+L.marker([-2.6303, 24.0436]).actions.addRemove(S.map)
+```
+![Alt text](1976.png)
+Peter Piot, a young Belgian scientist, credited with discovering the Ebola virus. 
+* Cases:603
+* Deaths:432
+
+
+ 
+# 1979
+```
+- step: 75
+- center: [14.4347, 23.3350]
+- zoom: 5
+L.marker([16.7204, 30.1465]).actions.addRemove(S.map)
+```
+![Alt text](1979.png)
+The Ebola virus virion is considered gigantic by viral standards and is similar to that of the Marburg virus.
+
+* Cases: 34
+* Deaths: 22
+* Fatality Rate: 65%
+
+
+# 1989
+```
+- step: 100
+- center: [8.4941, 110.2148]
+- zoom: 4
+L.marker([16.5941, 121.2451]).actions.addRemove(S.map)
+```
+![Alt text](1989.png)
+Crab-eating macaques developed a different strain of Ebola in a facility in the Philippines. Three workers contracted the disease but never showed symptoms.  
+
+* Cases: 3
+* Deaths: 0
+* Fatality Rate: n/a
+  
+
+# 1990
+```
+- step: 125
+- center: [37.3527, -80.6396]
+- zoom: 6
+L.marker([39.0704, -77.9041]).actions.addRemove(S.map)
+```
+![Alt text](1990.png)
+Dozens of infected crab-eat macaques were imported into Reston, VA (giving the strain its name) from the Philippines. Four people contracted Ebola, but never showed symptoms.
+
+* Cases: 4
+* Deaths: 0
+* Fatality Rate: n/a
+  
+  
+# 1994
+```
+- step: 150
+- center: [-6.6646, 1.8457]
+- zoom: 4
+L.marker([-0.0220, 11.8433]).actions.addRemove(S.map)
+```
+![Alt text](1994.png)
+Gold mining camps deep in the rainforest fostered the 1994 Ebola outbreak. 
+
+* Cases: 52
+* Deaths: 31
+* Fatality Rate: 60%
+  
+
+# 1995
+```
+- step: 175
+- center: [-3.8204, 14.4141]
+- zoom: 5
+L.marker([-2.6303, 24.0436]).actions.addRemove(S.map)
+```
+![Alt text](1995.png)
+A man puts up informational posters about the Ebola outbreak in Kinshasa. 
+
+* Cases: 315
+* Deaths: 250
+* Fatality Rate: 79%
+  
+
+# 1996
+```
+- step: 200
+- center: [-6.6646, 1.8457]
+- zoom: 4
+L.marker([-0.0220, 11.8433]).actions.addRemove(S.map)
+```
+![Alt text](1996.png)
+A dead and infected chimpanzee was consumed by people hunting, inciting the outbreak. 
+
+* Cases: 37
+* Deaths: 21
+* Fatality Rate: 57%
+
+# 1997
+```
+- step: 225
+- center: [-6.6646, 1.8457]
+- zoom: 4
+L.marker([-0.0220, 11.8433]).actions.addRemove(S.map)
+```
+![Alt text](1997.png)
+The Booue area suffered the brunt of the epidemic after a hunter who lived in a forest-camp contracted the disease. 
+
+* Cases: 60
+* Deaths: 0
+
+  
+
+# 2000
+```
+- step: 250
+- center: [-0.3955, 25.7959]
+- zoom: 5
+L.marker([2.1528, 32.5635]).actions.addRemove(S.map)
+```
+![Alt text](2000.png)
+The 2nd largest Ebola outbreak in world history.
+
+* Cases: 425
+* Deaths: 224
+* Fatality Rate: 53%
+  
+  
+# 2001
+```
+- step: 275
+- center: [-6.6646, 1.8457]
+- zoom: 4
+L.marker([-0.0220, 11.8433]).actions.addRemove(S.map)
+```
+![Alt text](2001.png)
+A member of the health department of the Gabonese Army disinfecting the entrance to Mekambo hospital. 
+
+* Cases: 122
+* Deaths: 96
+* Fatality Rate: 79%
+  
+  
+# 2002-2003
+```
+- step: 300
+- center: [-6.6646, 1.8457]
+- zoom: 4
+L.marker([0.0439, 15.5127]).actions.addRemove(S.map)
+```
+![Alt text](2002.png)
+Agent of Congolese Red Cross disinfects a room of an infected patient in Kelle hospital. 
+
+* Cases: 178
+* Deaths: 148
+
+ 
+
+# 2004
+```
+- step: 325
+- center: [14.4347, 23.3350]
+- zoom: 5
+L.marker([16.7204, 30.1465]).actions.addRemove(S.map)
+```
+![Alt text](2004.png)
+The World Health Organization worked to ensure local communities were educated about Ebola. 
+
+* Cases: 17
+* Deaths: 7
+* Fatality Rate: 41%
+  
+
+# 2007
+```
+- step: 350
+- center: [-3.8204, 14.4141]
+- zoom: 5
+L.marker([-2.6303, 24.0436]).actions.addRemove(S.map)
+L.marker([2.1528, 32.5635]).actions.addRemove(S.map)
+```
+![Alt text](2007.png)
+The outbreak occurred in remote communities in the DRC, requiring team members from the Ministry of Health of the DRC and WHO to reach them by foot and boats. 
+
+
+* Cases: 413
+* Deaths: 224
+
+
+# 2008
+```
+- step: 375
+- center: [8.4941, 110.2148]
+- zoom: 4
+L.marker([16.5941, 121.2451]).actions.addRemove(S.map)
+```
+![Alt text](2008.png)
+This outbreak marks the first instance of Ebola infecting pigs, but all humans infected did not show symptoms. 
+
+* Cases: 6
+* Deaths: 0
+* Fatality Rate: n/a
+  
+
+# 2009
+```
+- step: 400
+- center: [-3.8204, 14.4141]
+- zoom: 5
+L.marker([-2.6303, 24.0436]).actions.addRemove(S.map)
+```
+![Alt text](2009.png)
+Pictured is an isolation unit for suspected cases during the outbreak.  
+
+* Cases: 32
+* Deaths: 14
+* Fatality Rate: 45%
+  
+
+# 2012
+```
+- step: 425
+- center: [-3.8204, 14.4141]
+- zoom: 5
+L.marker([-2.6303, 24.0436]).actions.addRemove(S.map)
+L.marker([2.1528, 32.5635]).actions.addRemove(S.map)
+```
+![Alt text](2012.png)
+Inside the hospital in the district of Kibaale, the center of the outbreak. 
+
+
+* Cases: 101
+* Deaths: 53
+
+  
+
+# 2014
+```
+- step: 450
+- center: [10.1852, -7.8662]
+- zoom: 4
+L.marker([10.8117, -11.0962]).actions.addRemove(S.map)
+L.marker([8.8634, -11.8433]).actions.addRemove(S.map)
+L.marker([6.8610, -9.3823]).actions.addRemove(S.map)
+L.marker([10.1852, 7.9541]).actions.addRemove(S.map)
+```
+
+The worst outbreak in history continues. But you can help. [Donate.](https://www.unicefusa.org/donate/stop-spread-ebola-west-africa/18771?gclid=CjwKEAjwtIShBRD08fKD1OWSik4SJAAuKLov3RRgTffmIubQiatU-FoJEp231GBivmv_Fyd43DD3HRoCnjDw_wcB) 
+
+
+
+
+</script></body></html>
