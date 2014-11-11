@@ -14,8 +14,10 @@
     line-height: 1px;
 }
 #slides_container h1:after{
-    height: 1px;
     margin: 10px 0 10px 0;
+    display:none;
+    background-color:transparent;
+    
 }
 #slides_container p {
     margin:0px;
@@ -24,7 +26,7 @@
     height: 0px;
 }
 #slides_container {
-    width:400px;
+    width:33%;
 }
 .cartodb-timeslider, .ui-slider, .ui-slider-range {
     background-color: #0cc1bc;
@@ -38,7 +40,7 @@
    position:relative;
 }
 .title3{
-   left: 300px;
+   left: 500px;
    font-family: 'Proxima N W01 Bold', Sans-serif;
    position:relative;
 }

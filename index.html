@@ -39,7 +39,6 @@
 
   <div id="credits">
     <span class="title" id="title">The History of Ebola</span>
-    <span class="title2"><a href="#" data-reveal-id="myModal">Take the Quiz</a></span>
     <span class="title3"><a href="http://kateweeks.com/credits">Credits</a></span>
     <span class="author"><b id="author">By Kate Weeks</b> <a href="#">Odyssey.js</a><span>
   </span></span></div>
@@ -288,27 +287,38 @@
 # The History of Ebola
 ```
 - step: 1
-- center: [-4.0396, 5.5371]
+- center: [16.6362, -48.5156]
 - zoom: 2
+L.marker([16.7204, 30.1465]).actions.addRemove(S.map)
+L.marker([-2.6303, 24.0436]).actions.addRemove(S.map)
+L.marker([16.5941, 121.2451]).actions.addRemove(S.map)
+L.marker([39.0704, -77.9041]).actions.addRemove(S.map)
+L.marker([-0.0220, 11.8433]).actions.addRemove(S.map)
+L.marker([1.5490, 32.3635]).actions.addRemove(S.map)
+L.marker([0.0439, 15.5127]).actions.addRemove(S.map)
+L.marker([40.4148, -3.7079]).actions.addRemove(S.map)
+L.marker([33.0915, -96.8994]).actions.addRemove(S.map)
+L.marker([10.8117, -11.0962]).actions.addRemove(S.map)
+L.marker([8.8634, -11.8433]).actions.addRemove(S.map)
+L.marker([6.8610, -9.3823]).actions.addRemove(S.map)
+L.marker([10.1852, 7.9541]).actions.addRemove(S.map)
 ```
 
 ![Alt text](graph.png)
 
 As seen from the graph, our world is currently facing the worst Ebola outbreak in history.
-Follow us on a tour of the world and time to learn about Ebola in history. 
+Follow us on a tour of the world and time to learn about Ebola in history. (For case information, please click the markers on the following slides)
 
 # 1976-1977
 ```
 - step: 50
 - center: [2.5480, 16.7871]
 - zoom: 4
-L.marker([16.7204, 30.1465]).actions.addRemove(S.map)
-L.marker([-2.6303, 24.0436]).actions.addRemove(S.map)
+L.marker([16.7204, 30.1465],{title:"Click"}).bindPopup("Cases: 284<br>Deaths: 151<br>Fatalities: 53%").actions.addRemove(S.map)
+L.marker([-2.6303, 24.0436],{title:"Click"}).bindPopup("<b>1976</b><br>Cases: 318<br>Deaths: 280<br>Fatalities: 88%<br><br><b>1977</b><br>Cases: 1<br>Deaths: 1<br>Fatalities: N/A").actions.addRemove(S.map)
 ```
 ![Alt text](1976.png)
 Peter Piot, a young Belgian scientist, credited with discovering the Ebola virus. 
-* Cases:603
-* Deaths:432
 
 
  
@@ -317,14 +327,10 @@ Peter Piot, a young Belgian scientist, credited with discovering the Ebola virus
 - step: 75
 - center: [14.4347, 23.3350]
 - zoom: 5
-L.marker([16.7204, 30.1465]).actions.addRemove(S.map)
+L.marker([16.7204, 30.1465],{title:"Click"}).bindPopup("Cases: 34<br>Deaths: 22<br>Fatalities: 65%").actions.addRemove(S.map)
 ```
 ![Alt text](1979.png)
 The Ebola virus virion is considered gigantic by viral standards and is similar to that of the Marburg virus.
-
-* Cases: 34
-* Deaths: 22
-* Fatality Rate: 65%
 
 
 # 1989
@@ -332,59 +338,44 @@ The Ebola virus virion is considered gigantic by viral standards and is similar 
 - step: 100
 - center: [8.4941, 110.2148]
 - zoom: 4
-L.marker([16.5941, 121.2451]).actions.addRemove(S.map)
+L.marker([16.5941, 121.2451],{title:"Click"}).bindPopup("Cases: 3<br>Deaths: 0<br>Fatalities: N/A").actions.addRemove(S.map)
 ```
 ![Alt text](1989.png)
 Crab-eating macaques developed a different strain of Ebola in a facility in the Philippines. Three workers contracted the disease but never showed symptoms.  
-
-* Cases: 3
-* Deaths: 0
-* Fatality Rate: n/a
-  
 
 # 1990
 ```
 - step: 125
 - center: [37.3527, -80.6396]
 - zoom: 6
-L.marker([39.0704, -77.9041]).actions.addRemove(S.map)
+L.marker([39.0704, -77.9041],{title:"Click"}).bindPopup("Cases: 4<br>Deaths: 0<br>Fatalities: N/A").actions.addRemove(S.map)
 ```
 ![Alt text](1990.png)
 Dozens of infected crab-eat macaques were imported into Reston, VA (giving the strain its name) from the Philippines. Four people contracted Ebola, but never showed symptoms.
 
-* Cases: 4
-* Deaths: 0
-* Fatality Rate: n/a
-  
-  
+
 # 1994
 ```
 - step: 150
 - center: [-6.6646, 1.8457]
 - zoom: 4
-L.marker([-0.0220, 11.8433]).actions.addRemove(S.map)
+L.marker([-0.0220, 11.8433],{title:"Click"}).bindPopup("Cases: 52<br>Deaths: 31<br>Fatalities: 60%").actions.addRemove(S.map)
 ```
 ![Alt text](1994.png)
 Gold mining camps deep in the rainforest fostered the 1994 Ebola outbreak. 
 
-* Cases: 52
-* Deaths: 31
-* Fatality Rate: 60%
-  
 
 # 1995
 ```
 - step: 175
 - center: [-3.8204, 14.4141]
 - zoom: 5
-L.marker([-2.6303, 24.0436]).actions.addRemove(S.map)
+L.marker([-2.6303, 24.0436],{title:"Click"}).bindPopup("Cases: 315<br>Deaths: 250<br>Fatalities: 79%").actions.addRemove(S.map)
 ```
 ![Alt text](1995.png)
 A man puts up informational posters about the Ebola outbreak in Kinshasa. 
 
-* Cases: 315
-* Deaths: 250
-* Fatality Rate: 79%
+
   
 
 # 1996
@@ -392,27 +383,24 @@ A man puts up informational posters about the Ebola outbreak in Kinshasa.
 - step: 200
 - center: [-6.6646, 1.8457]
 - zoom: 4
-L.marker([-0.0220, 11.8433]).actions.addRemove(S.map)
+L.marker([-0.0220, 11.8433],{title:"Click"}).bindPopup("Cases: 37<br>Deaths: 21<br>Fatalities: 57%").actions.addRemove(S.map)
 ```
 ![Alt text](1996.png)
 A dead and infected chimpanzee was consumed by people hunting, inciting the outbreak. 
 
-* Cases: 37
-* Deaths: 21
-* Fatality Rate: 57%
+
 
 # 1997
 ```
 - step: 225
 - center: [-6.6646, 1.8457]
 - zoom: 4
-L.marker([-0.0220, 11.8433]).actions.addRemove(S.map)
+L.marker([-0.0220, 11.8433],{title:"Click"}).bindPopup("Cases: 60<br>Deaths: 0<br>Fatalities: N/A").actions.addRemove(S.map)
 ```
 ![Alt text](1997.png)
 The Booue area suffered the brunt of the epidemic after a hunter who lived in a forest-camp contracted the disease. 
 
-* Cases: 60
-* Deaths: 0
+
 
   
 
@@ -421,14 +409,11 @@ The Booue area suffered the brunt of the epidemic after a hunter who lived in a 
 - step: 250
 - center: [-0.3955, 25.7959]
 - zoom: 5
-L.marker([2.1528, 32.5635]).actions.addRemove(S.map)
+L.marker([1.5490, 32.3635],{title:"Click"}).bindPopup("Cases: 425<br>Deaths: 224<br>Fatalities: 53%").actions.addRemove(S.map)
 ```
 ![Alt text](2000.png)
 The 2nd largest Ebola outbreak in world history.
 
-* Cases: 425
-* Deaths: 224
-* Fatality Rate: 53%
   
   
 # 2001
@@ -436,14 +421,11 @@ The 2nd largest Ebola outbreak in world history.
 - step: 275
 - center: [-6.6646, 1.8457]
 - zoom: 4
-L.marker([-0.0220, 11.8433]).actions.addRemove(S.map)
+L.marker([-0.0220, 11.8433],{title:"Click"}).bindPopup("Cases: 122<br>Deaths: 96<br>Fatalities: 79%").actions.addRemove(S.map)
 ```
 ![Alt text](2001.png)
 A member of the health department of the Gabonese Army disinfecting the entrance to Mekambo hospital. 
 
-* Cases: 122
-* Deaths: 96
-* Fatality Rate: 79%
   
   
 # 2002-2003
@@ -451,13 +433,12 @@ A member of the health department of the Gabonese Army disinfecting the entrance
 - step: 300
 - center: [-6.6646, 1.8457]
 - zoom: 4
-L.marker([0.0439, 15.5127]).actions.addRemove(S.map)
+L.marker([0.0439, 15.5127],{title:"Click"}).bindPopup("<b>2002</b><br>Cases: 143<br>Deaths: 128<br>Fatalities: 90%<br><br><b>2003</b><br>Cases: 35<br>Deaths: 29<br>Fatalities: 83%").actions.addRemove(S.map)
 ```
 ![Alt text](2002.png)
 Agent of Congolese Red Cross disinfects a room of an infected patient in Kelle hospital. 
 
-* Cases: 178
-* Deaths: 148
+
 
  
 
@@ -466,30 +447,22 @@ Agent of Congolese Red Cross disinfects a room of an infected patient in Kelle h
 - step: 325
 - center: [14.4347, 23.3350]
 - zoom: 5
-L.marker([16.7204, 30.1465]).actions.addRemove(S.map)
+L.marker([16.7204, 30.1465],{title:"Click"}).bindPopup("Cases: 17<br>Deaths: 7<br>Fatalities: 41%").actions.addRemove(S.map)
 ```
 ![Alt text](2004.png)
 The World Health Organization worked to ensure local communities were educated about Ebola. 
 
-* Cases: 17
-* Deaths: 7
-* Fatality Rate: 41%
-  
 
 # 2007
 ```
 - step: 350
 - center: [-3.8204, 14.4141]
 - zoom: 5
-L.marker([-2.6303, 24.0436]).actions.addRemove(S.map)
-L.marker([2.1528, 32.5635]).actions.addRemove(S.map)
+L.marker([-2.6303, 24.0436],{title:"Click"}).bindPopup("Cases: 264<br>Deaths: 187<br>Fatalities: 71%").actions.addRemove(S.map)
+L.marker([1.5490, 32.3635],{title:"Click"}).bindPopup("Cases: 149<br>Deaths: 37<br>Fatalities: 25%").actions.addRemove(S.map)
 ```
 ![Alt text](2007.png)
 The outbreak occurred in remote communities in the DRC, requiring team members from the Ministry of Health of the DRC and WHO to reach them by foot and boats. 
-
-
-* Cases: 413
-* Deaths: 224
 
 
 # 2008
@@ -497,60 +470,53 @@ The outbreak occurred in remote communities in the DRC, requiring team members f
 - step: 375
 - center: [8.4941, 110.2148]
 - zoom: 4
-L.marker([16.5941, 121.2451]).actions.addRemove(S.map)
+L.marker([16.5941, 121.2451],{title:"Click"}).bindPopup("Cases: 6<br>Deaths: 0<br>Fatalities: N/A").actions.addRemove(S.map)
 ```
 ![Alt text](2008.png)
 This outbreak marks the first instance of Ebola infecting pigs, but all humans infected did not show symptoms. 
 
-* Cases: 6
-* Deaths: 0
-* Fatality Rate: n/a
-  
 
 # 2009
 ```
 - step: 400
 - center: [-3.8204, 14.4141]
 - zoom: 5
-L.marker([-2.6303, 24.0436]).actions.addRemove(S.map)
+L.marker([-2.6303, 24.0436],{title:"Click"}).bindPopup("Cases: 32<br>Deaths: 14<br>Fatalities: 45%").actions.addRemove(S.map)
 ```
 ![Alt text](2009.png)
 Pictured is an isolation unit for suspected cases during the outbreak.  
 
-* Cases: 32
-* Deaths: 14
-* Fatality Rate: 45%
-  
 
 # 2012
 ```
 - step: 425
 - center: [-3.8204, 14.4141]
 - zoom: 5
-L.marker([-2.6303, 24.0436]).actions.addRemove(S.map)
-L.marker([2.1528, 32.5635]).actions.addRemove(S.map)
+L.marker([-2.6303, 24.0436],{title:"Click"}).bindPopup("Cases: 77<br>Deaths: 36<br>Fatalities: 47%").actions.addRemove(S.map)
+L.marker([1.5490, 32.3635],{title:"Click"}).bindPopup("Cases: 24<br>Deaths: 17<br>Fatalities: 71%").actions.addRemove(S.map)
 ```
 ![Alt text](2012.png)
 Inside the hospital in the district of Kibaale, the center of the outbreak. 
 
-
-* Cases: 101
-* Deaths: 53
 
   
 
 # 2014
 ```
 - step: 450
-- center: [10.1852, -7.8662]
-- zoom: 4
+- center: [16.6362, -48.5156]
+- zoom: 2
 L.marker([10.8117, -11.0962]).actions.addRemove(S.map)
 L.marker([8.8634, -11.8433]).actions.addRemove(S.map)
 L.marker([6.8610, -9.3823]).actions.addRemove(S.map)
 L.marker([10.1852, 7.9541]).actions.addRemove(S.map)
+L.marker([40.4148, -3.7079]).actions.addRemove(S.map)
+L.marker([33.0915, -96.8994]).actions.addRemove(S.map)
+L.marker([41.1125, -3.5156]).actions.addRemove(S.map)
 ```
-
-The worst outbreak in history continues. But you can help. [Donate.](https://www.unicefusa.org/donate/stop-spread-ebola-west-africa/18771?gclid=CjwKEAjwtIShBRD08fKD1OWSik4SJAAuKLov3RRgTffmIubQiatU-FoJEp231GBivmv_Fyd43DD3HRoCnjDw_wcB) 
+![Alt text](2014.jpg)
+The worst outbreak in history continues. But you can help. [Donate.](https://www.unicefusa.org/donate/stop-spread-ebola-west-africa/18771?gclid=CjwKEAjwtIShBRD08fKD1OWSik4SJAAuKLov3RRgTffmIubQiatU-FoJEp231GBivmv_Fyd43DD3HRoCnjDw_wcB)
+For current outbreak statistics in West Africa, visit the home page. 
 
 
 
